@@ -1,7 +1,25 @@
 <!-- NASA KONTAKT LISTA -->
 <template>
     <div>
+
+        <!--FORMA ZA UNOSENJE KONTAKTA-->
+        <!--@submit.prevent - ne reloduje stranicu na klik; ="addContact" - fnc koja nam dodaje kontakt u listu-->
+        <form @submit.prevent="addContact">
+            <label>First Name</label>
+            <input v-model="newContact.firstName" type="text" placeholder="Enter first name"><br>
+
+            <label>Last Name</label>
+            <input v-model="newContact.lastName" type="text" placeholder="Enter last name"><br>
+
+            <label>Email</label>
+            <input v-model="newContact.email" type="text" placeholder="Enter email"><br>
+
+            <button type="submit">Add contact</button>
+        </form>
+
+
         <h3>Contact List</h3>
+
 
         <table border=3>
             <thead>
@@ -20,6 +38,8 @@
                 </tr>
             </tbody>
         </table>
+
+
     </div>
     
 </template>
@@ -30,6 +50,11 @@ export default {
     //data je fnc koja vraca objekat
     data() {
         return {
+            newContact: {
+                firstName: '',
+                lastName: '',
+                email: ''
+            },
             contacts: [
                 {firstName: 'Saban', lastName:'Saulic', email: 'saban@gmail.com'},
                 {firstName: 'Mira', lastName:'Skoric', email: 'mira@gmail.com'},
@@ -38,6 +63,14 @@ export default {
                 {firstName: 'Ilda', lastName:'Saulic', email: 'ilda@gmail.com'}
             ]
         };
+    },
+
+    methods: {
+        addContact() {
+            // console.log(this.newContact);
+            this.contacts.push(this.newContact); //dodajemo kontakt u niz objekata 'contacts'
+            this.newContact = {}; //ocistili smo input polje i postavili da je newContact prazan objekat
+        }
     }
 };
 </script>
