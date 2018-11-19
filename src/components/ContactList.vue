@@ -27,6 +27,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th></th>
             </thead>
             <tbody>
                 <!--ovaj key nam je redni broj za svakog usera; :key="key" je kljuc, tj index-->
@@ -35,6 +36,9 @@
                     <td>{{contact.firstName}}</td>
                     <td>{{contact.lastName}}</td>
                     <td>{{contact.email}}</td>
+                    <td>
+                        <button @click="removeContact(contact)">Remove contact</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -70,6 +74,13 @@ export default {
             // console.log(this.newContact);
             this.contacts.push(this.newContact); //dodajemo kontakt u niz objekata 'contacts'
             this.newContact = {}; //ocistili smo input polje i postavili da je newContact prazan objekat
+        },
+
+        removeContact(contact) {
+            // console.log(contact);
+            let index = this.contacts.indexOf(contact); //trazimo indexe kontakata
+            // console.log(index);
+            this.contacts.splice(index, 1); //splice(index, 1) - na toj poziciji(indexa) mi skloni 1
         }
     }
 };
