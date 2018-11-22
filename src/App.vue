@@ -1,21 +1,42 @@
+<!--PARENT KOMPONENTA u kojoj se nesto nalazi, i iz ove komponente saljemo drugim komponentama podatke-->
+
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <ContactList /> <!-- dodajemo ContactList, da bi nam ispisao -->
+    <!-- <BlogPost 
+      v-bind:title="parentTitle"
+      @callParentFunction="parentFunction"
+    /> nova komponenta, preko v-bind saljemo title BlogPosta -->
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import ContactList from './components/ContactList.vue' //importujemo komponentu
+import BlogPost from './components/BlogPost.vue'
 
 export default {
   name: 'app',
+  data() {
+    return {
+      parentTitle: 'Blog title' //title BlogPosta, BlogPost.vue nam je child komponenta jer njoj saljemo title
+    };
+  },
   components: {
     HelloWorld,
-    ContactList //navodimo komponentu u listu komponenata, da bi mogli da je koristimo
-  }
+    ContactList, //navodimo komponentu u listu komponenata, da bi mogli da je koristimo
+    BlogPost,
+  },
+
+  methods: {
+    parentFunction(name, age) {
+      console.log('Hi from parent component, ' + name, age);
+    }
+  },
+
+
 }
 </script>
 
