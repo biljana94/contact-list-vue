@@ -27,33 +27,8 @@
         </div>
 
 
-        <h3>Contact List</h3>
+        <ContactsTable :contactsList='contacts'/> <!--kontakt table-->
 
-
-        <!--Tabela za kontakte-->
-        <table border=3>
-            <thead>
-                <th>Key</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Delete</th>
-            </thead>
-            <tbody>
-                <!--ovaj key nam je redni broj za svakog usera; :key="key" je kljuc, tj index-->
-                <tr v-for="(contact, index) in contacts" :key="index">
-                    <td>{{index + 1}}</td> <!--index+1 -> da ne krece od 0 nego od 1-->
-                    <td>{{contact.firstName}}</td>
-                    <td>{{contact.lastName}}</td>
-                    <td>{{contact.email}}</td>
-                    <td>
-                        <!--dugme za brisanje kontakta koje radi na akciju @click="removeContact(contact)"; 
-                        ta metoda se nalazi u script tagu, u 'methods'-->
-                        <button class="btn btn-danger" @click="removeContact(contact)">Remove contact</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
 
     </div>
@@ -62,7 +37,15 @@
 
 
 <script>
+
+import ContactsTable from './ContactsTable';
+
 export default {
+
+    components: {
+        ContactsTable
+    },
+
     //data je fnc koja vraca objekat
     data() {
         return {
