@@ -29,7 +29,7 @@
 
         <ContactsTable :contactsList='contacts'/> <!--kontakt table-->
 
-
+        <ContactDetails :contact="routeContact"/> <!--computed properti-->
 
     </div>
     
@@ -39,11 +39,13 @@
 <script>
 
 import ContactsTable from './ContactsTable';
+import ContactDetails from './ContactDetails';
 
 export default {
 
     components: {
-        ContactsTable
+        ContactsTable,
+        ContactDetails
     },
 
     //data je fnc koja vraca objekat
@@ -55,11 +57,11 @@ export default {
                 email: ''
             },
             contacts: [
-                {firstName: 'Saban', lastName:'Saulic', email: 'saban@gmail.com'},
-                {firstName: 'Mira', lastName:'Skoric', email: 'mira@gmail.com'},
-                {firstName: 'Lepa', lastName:'Lukic', email: 'lepa@gmail.com'},
-                {firstName: 'Zorica', lastName:'Brunclik', email: 'zorica@gmail.com'},
-                {firstName: 'Ilda', lastName:'Saulic', email: 'ilda@gmail.com'}
+                {id: 1, firstName: 'Saban', lastName:'Saulic', email: 'saban@gmail.com'},
+                {id: 2, firstName: 'Mira', lastName:'Skoric', email: 'mira@gmail.com'},
+                {id: 3, firstName: 'Lepa', lastName:'Lukic', email: 'lepa@gmail.com'},
+                {id: 4, firstName: 'Zorica', lastName:'Brunclik', email: 'zorica@gmail.com'},
+                {id: 5, firstName: 'Ilda', lastName:'Saulic', email: 'ilda@gmail.com'}
             ]
         };
     },
@@ -79,6 +81,17 @@ export default {
             let index = this.contacts.indexOf(contact); //trazimo indexe kontakata
             // console.log(index);
             this.contacts.splice(index, 1); //splice(index, 1) - na toj poziciji(indexa) mi skloni 1 kontakt
+        }
+    },
+
+    //computed properti
+    computed: {
+        routeContact() {
+            //uzimamo kontakt po id
+            //na ovaj nacin uvek izvlacimo parametre iz rute (this.$route.params.id)
+            let findedContact = this.contacts.find(contact => contact.id == this.$route.params.id);
+            console.log(findedContact);
+            return findedContact;
         }
     }
 };

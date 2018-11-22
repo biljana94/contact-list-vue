@@ -4,6 +4,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'; //importujemo vue router biblioteku
 import ContactList from './components/ContactList.vue'; //importujemo komponentu ContactList.vue
 import AddContact from './components/AddContact.vue';
+import ContactDetails from './components/ContactDetails.vue';
 
 Vue.config.productionTip = false;
 
@@ -13,7 +14,8 @@ Vue.use(VueRouter); //ovde koristimo vuerouter biblioteku
 const routes = [
   {path: '/', redirect: '/contacts'}, //redirektovanje
   {path: '/contacts', component: ContactList}, //ruta /contacts ide na komponentu ContactList.vue
-  {path: '/add-contact', component: AddContact}
+  {path: '/add-contact', component: AddContact},
+  {path: '/contact/:id', component: ContactList, name: 'contact-details'} //gadjamo rutu po name u ContactsTable
 ];
 
 //instanca VueRouter i stavljamo u nju konstantu router
